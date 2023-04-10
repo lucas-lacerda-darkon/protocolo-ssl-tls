@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class Cliente extends JFrame implements KeyListener {
         textArea.addKeyListener(this);
         add(textArea);
 
+        setMinimumSize(new Dimension(400, 300)); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
