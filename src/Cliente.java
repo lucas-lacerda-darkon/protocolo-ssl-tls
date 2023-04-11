@@ -18,20 +18,14 @@ public class Cliente extends JFrame implements KeyListener {
     public Cliente() throws IOException {
         SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
 
-        SSLSocket sslSocket = (SSLSocket) sslSocketFactory.createSocket("localhost", 5050);
+        SSLSocket sslSocket = (SSLSocket) sslSocketFactory.createSocket("localhost", 12345);
         System.out.println("Conectado ao servidor.");
-
-        // Configura o socket para verificar o certificado do servidor
-        sslSocket.setNeedClientAuth(true);
-
-        // Inicia o handshake SSL
-        sslSocket.startHandshake();
 
         textArea = new JTextArea();
         textArea.addKeyListener(this);
         add(textArea);
 
-        setMinimumSize(new Dimension(400, 300)); 
+        setMinimumSize(new Dimension(400, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
@@ -47,11 +41,11 @@ public class Cliente extends JFrame implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-            String message = textArea.getText();
-            out.println(message + " lentra enviada");
-            
-            textArea.setText("");
-    
+        String message = textArea.getText();
+        out.println(message + " lentra enviada");
+
+        textArea.setText("");
+
     }
 
     @Override

@@ -13,24 +13,25 @@ public class Servidor {
 
     public static void main(String[] args) throws IOException {
         SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-        SSLServerSocket sslServerSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(5050);
+        SSLServerSocket sslServerSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(12345);
         System.out.println("Servidor iniciado.");
 
-        SSLSocket clientSocket = (SSLSocket) sslServerSocket.accept();
-        System.out.println("Cliente conectado.");
+        SSLSocket clienteSocket = (SSLSocket) sslServerSocket.accept(); // esperando conexão
+        System.out.println("Conexão recebida de " + clienteSocket.getInetAddress().getHostAddress());
 
-        //Scanner scanner = new Scanner(clientSocket.getInputStream());
-        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        // Scanner scanner = new Scanner(clientSocket.getInputStream());
+        BufferedReader in = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
         while (true) {
-            //String message = scanner.nextLine();
+            // String message = scanner.nextLine();
             String message = in.readLine();
             System.out.println("Mensagem recebida: " + message);
         }
         /*
          * //trata a conexão com o cliente aqui
-                    BufferedReader in = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
-                    String mensagem = in.readLine();
-                    System.out.println("Mensagem recebida do cliente: " + mensagem);
-        */
+         * BufferedReader in = new BufferedReader(new
+         * InputStreamReader(clienteSocket.getInputStream()));
+         * String mensagem = in.readLine();
+         * System.out.println("Mensagem recebida do cliente: " + mensagem);
+         */
     }
 }
