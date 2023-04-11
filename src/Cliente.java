@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
@@ -13,8 +16,16 @@ public class Cliente extends JFrame implements KeyListener {
     private final PrintWriter out;
 
     public Cliente() throws IOException {
-        Socket socket = new Socket("localhost", 5000);
+        // Cria a fábrica de socket SSL
+        SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        
+        // Cria o socket SSL
+        SSLSocket socket = (SSLSocket) factory.createSocket("localhost", 5000);
         System.out.println("Conectado ao servidor.");
+
+        // Define as opções de criptografia
+        String[] cipherSuites = {"TLS_RSA_WITH_AES_128_CBC_SHA"};
+        socket.setEnabledCipherSuites(cipherSuites);
 
         textArea = new JTextArea();
         textArea.addKeyListener(this);
